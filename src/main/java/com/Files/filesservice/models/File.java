@@ -8,6 +8,10 @@ import java.io.Serializable;
 @Table(name = "files")
 public class File implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "name")
     private String name;
 
@@ -17,26 +21,29 @@ public class File implements Serializable {
     @Column(name = "size")
     private int size;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "folder_id", nullable = false)
     private Folder folder;
+    
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    public File(String name, String extension, int size, Folder folder) {
+    public File(String name, String extension, int size, Folder folder, User user) {
         this.name = name;
         this.extension = extension;
         this.size = size;
         this.folder = folder;
+        this.user = user;
     }
 
     public File() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -63,14 +70,6 @@ public class File implements Serializable {
         this.size = size;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Folder getFolder() {
         return folder;
     }
@@ -86,5 +85,4 @@ public class File implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    
 }
