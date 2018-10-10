@@ -23,17 +23,21 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     UserRepository userRepository;
 
-    public DataLoader(){}
 
-    public void run(ApplicationArguments args){
-        Folder folder = new Folder("folder 1");
-        folderRepository.save(folder);
+    @Override
+    public void run(ApplicationArguments args) throws Exception{
 
-        User user = new User("Connie");
-        userRepository.save(user);
+        User user1 = new User("Connie");
+        userRepository.save(user1);
 
-        File file = new File("file 1", "01", 50, folder);
-        fileRepository.save(file);
+        Folder folder1 = new Folder("folder 1", user1);
+        folderRepository.save(folder1);
+
+        Folder folder2 = new Folder("folder2", user1);
+        folderRepository.save(folder2);
+
+        File file1 = new File("file 1", "01", 50, folder1);
+        fileRepository.save(file1);
 
     }
 }

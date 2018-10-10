@@ -25,14 +25,13 @@ public class File implements Serializable {
     @ManyToOne
     @JoinColumn(name = "folder_id", nullable = false)
     private Folder folder;
-    
 
-    public File(String name, String extension, int size, Folder folder, User user) {
+
+    public File(String name, String extension, int size, Folder folder) {
         this.name = name;
         this.extension = extension;
         this.size = size;
         this.folder = folder;
-        this.user = user;
     }
 
     public File() {
@@ -78,11 +77,4 @@ public class File implements Serializable {
         this.folder = folder;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
